@@ -10,14 +10,14 @@ const uri = `${connectionProtocol}://${dbUser}:${dbPassword}@${clusterAddress}/?
 const client = new MongoClient(uri);
 
 console.log('Trying to connect to db');
-console.log("protocol: ", connectionProtocol)
+console.log("client: ", JSON.stringify(client))
 
 try {
   await client.connect();
   await client.db(dbName).command({ ping: 1 });
   console.log('Connected successfully to server');
 } catch (error) {
-  console.log('Connection failed.');
+  console.log('Connection failed: ', JSON.stringify(error));
   await client.close();
   console.log('Connection closed.');
   process.exit(1);
